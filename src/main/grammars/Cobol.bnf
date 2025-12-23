@@ -1,0 +1,61 @@
+{
+  parserClass="cobol.parser.CobolParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Cobol"
+  psiImplClassSuffix="Impl"
+  psiPackage="cobol.psi"
+  psiImplPackage="cobol.psi.impl"
+
+  elementTypeHolderClass="cobol.psi.CobolTypes"
+  elementTypeClass="cobol.psi.CobolElementType"
+  tokenTypeClass="cobol.psi.CobolTokenType"
+}
+
+cobol_file ::= cobol_source_program
+
+// PROGRAM
+cobol_source_program ::=
+    id_div_line
+    prog_id_line
+    data_div_section?
+    proc_div_lines
+
+id_div_line ::= NUMBER IDENTIFICATION DIVISION DOT
+prog_id_line   ::= NUMBER PROG_ID DOT IDENTIFIER DOT
+
+// DATA DIVISION
+data_div_section  ::=
+    data_div_line
+    working_storage_line
+    data_item_line*
+data_div_line ::= NUMBER DATA DIVISION DOT
+working_storage_line ::= NUMBER WORKING_STORAGE SECTION DOT
+data_item_line ::= NUMBER data_item
+data_item ::= NUMBER IDENTIFIER PIC pic_string VALUE literal DOT
+pic_string ::= NUMBER LPAREN NUMBER RPAREN
+literal ::= NUMBER | STRING
+
+// PROCEDURE DIVISION
+proc_div_lines ::= proc_div_line (para_line | stmt_line)*
+proc_div_line ::= NUMBER PROCEDURE DIVISION DOT
+para_line ::= NUMBER para_name DOT
+para_name ::= IDENTIFIER
+stmt_line ::= NUMBER stmt
+
+// STATEMENTS
+stmt ::=
+    perform_stmt
+    | stop_stmt
+    | display_stmt
+
+perform_stmt ::= PERFORM para_name perform_vary
+perform_vary ::= VARYING IDENTIFIER FROM value_ BY value_ UNTIL cond
+value_ ::= IDENTIFIER | NUMBER
+cond ::= IDENTIFIER EQ NUMBER
+
+stop_stmt ::= STOP RUN DOT
+
+display_stmt ::= DISPLAY display_arg+ DOT
+display_arg ::= IDENTIFIER | STRING
