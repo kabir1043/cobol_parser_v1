@@ -27,6 +27,11 @@
         <lang.parserDefinition
                 language="Cobol"
                 implementationClass="cobol.CobolParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="Cobol"
+                implementationClass="cobol.CobolSyntaxHighlighterFactory"/>
+        <colorSettingsPage
+                implementation="cobol.CobolColorSettingsPage"/>
         <fileType
             name="Cobol File"
             language="Cobol"
