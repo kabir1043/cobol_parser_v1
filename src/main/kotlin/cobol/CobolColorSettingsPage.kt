@@ -17,6 +17,7 @@ class CobolColorSettingsPage: ColorSettingsPage {
             AttributesDescriptor("Identifiers", CobolSyntaxHighlighter.IDENTIFIER),
             AttributesDescriptor("Literals//Numbers", CobolSyntaxHighlighter.NUMBER),
             AttributesDescriptor("Literals//Strings", CobolSyntaxHighlighter.STRING),
+            AttributesDescriptor("Pic strings", CobolSyntaxHighlighter.PIC_STRING),
             AttributesDescriptor("Operators", CobolSyntaxHighlighter.OPERATOR),
             AttributesDescriptor("Bad characters", CobolSyntaxHighlighter.BAD_CHARACTER)
         )

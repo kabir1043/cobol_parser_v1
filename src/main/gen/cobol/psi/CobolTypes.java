@@ -22,7 +22,6 @@ public interface CobolTypes {
   IElementType PARA_NAME = new CobolElementType("PARA_NAME");
   IElementType PERFORM_STMT = new CobolElementType("PERFORM_STMT");
   IElementType PERFORM_VARY = new CobolElementType("PERFORM_VARY");
-  IElementType PIC_STRING = new CobolElementType("PIC_STRING");
   IElementType PROC_DIV_LINE = new CobolElementType("PROC_DIV_LINE");
   IElementType PROC_DIV_LINES = new CobolElementType("PROC_DIV_LINES");
   IElementType PROG_ID_LINE = new CobolElementType("PROG_ID_LINE");
@@ -41,13 +40,12 @@ public interface CobolTypes {
   IElementType FROM = new CobolTokenType("FROM");
   IElementType IDENTIFICATION = new CobolTokenType("IDENTIFICATION");
   IElementType IDENTIFIER = new CobolTokenType("IDENTIFIER");
-  IElementType LPAREN = new CobolTokenType("LPAREN");
   IElementType NUMBER = new CobolTokenType("NUMBER");
   IElementType PERFORM = new CobolTokenType("PERFORM");
   IElementType PIC = new CobolTokenType("PIC");
+  IElementType PIC_STRING = new CobolTokenType("PIC_STRING");
   IElementType PROCEDURE = new CobolTokenType("PROCEDURE");
   IElementType PROG_ID = new CobolTokenType("PROG_ID");
-  IElementType RPAREN = new CobolTokenType("RPAREN");
   IElementType RUN = new CobolTokenType("RUN");
   IElementType SECTION = new CobolTokenType("SECTION");
   IElementType STOP = new CobolTokenType("STOP");
@@ -101,9 +99,6 @@ public interface CobolTypes {
       }
       else if (type == PERFORM_VARY) {
         return new CobolPerformVaryImpl(node);
-      }
-      else if (type == PIC_STRING) {
-        return new CobolPicStringImpl(node);
       }
       else if (type == PROC_DIV_LINE) {
         return new CobolProcDivLineImpl(node);

@@ -32,9 +32,8 @@ data_div_section  ::=
     data_item_line*
 data_div_line ::= NUMBER DATA DIVISION DOT
 working_storage_line ::= NUMBER WORKING_STORAGE SECTION DOT
-data_item_line ::= NUMBER data_item
-data_item ::= NUMBER IDENTIFIER PIC pic_string VALUE literal DOT
-pic_string ::= NUMBER LPAREN NUMBER RPAREN
+data_item_line ::= NUMBER data_item DOT
+data_item ::= NUMBER IDENTIFIER PIC PIC_STRING VALUE literal
 literal ::= NUMBER | STRING
 
 // PROCEDURE DIVISION

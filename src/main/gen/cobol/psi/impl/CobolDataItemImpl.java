@@ -33,10 +33,4 @@ public class CobolDataItemImpl extends ASTWrapperPsiElement implements CobolData
     return findNotNullChildByClass(CobolLiteral.class);
   }
 
-  @Override
-  @NotNull
-  public CobolPicString getPicString() {
-    return findNotNullChildByClass(CobolPicString.class);
-  }
-
 }

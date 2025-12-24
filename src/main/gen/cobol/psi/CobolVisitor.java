@@ -63,10 +63,6 @@ public class CobolVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPicString(@NotNull CobolPicString o) {
-    visitPsiElement(o);
-  }
-
   public void visitProcDivLine(@NotNull CobolProcDivLine o) {
     visitPsiElement(o);
   }

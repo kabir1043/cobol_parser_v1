@@ -10,7 +10,4 @@ public interface CobolDataItem extends PsiElement {
   @NotNull
   CobolLiteral getLiteral();
 
-  @NotNull
-  CobolPicString getPicString();
-
 }

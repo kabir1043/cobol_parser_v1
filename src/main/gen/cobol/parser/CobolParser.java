@@ -118,23 +118,20 @@ public class CobolParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // NUMBER IDENTIFIER PIC pic_string VALUE literal DOT
+  // NUMBER IDENTIFIER PIC PIC_STRING VALUE literal
   public static boolean data_item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_item")) return false;
     if (!nextTokenIs(b, NUMBER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, NUMBER, IDENTIFIER, PIC);
-    r = r && pic_string(b, l + 1);
-    r = r && consumeToken(b, VALUE);
+    r = consumeTokens(b, 0, NUMBER, IDENTIFIER, PIC, PIC_STRING, VALUE);
     r = r && literal(b, l + 1);
-    r = r && consumeToken(b, DOT);
     exit_section_(b, m, DATA_ITEM, r);
     return r;
   }
 
   /* ********************************************************** */
-  // NUMBER data_item
+  // NUMBER data_item DOT
   public static boolean data_item_line(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_item_line")) return false;
     if (!nextTokenIs(b, NUMBER)) return false;
@@ -142,6 +139,7 @@ public class CobolParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, NUMBER);
     r = r && data_item(b, l + 1);
+    r = r && consumeToken(b, DOT);
     exit_section_(b, m, DATA_ITEM_LINE, r);
     return r;
   }
@@ -267,18 +265,6 @@ public class CobolParser implements PsiParser, LightPsiParser {
     r = r && consumeToken(b, UNTIL);
     r = r && cond(b, l + 1);
     exit_section_(b, m, PERFORM_VARY, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // NUMBER LPAREN NUMBER RPAREN
-  public static boolean pic_string(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "pic_string")) return false;
-    if (!nextTokenIs(b, NUMBER)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, NUMBER, LPAREN, NUMBER, RPAREN);
-    exit_section_(b, m, PIC_STRING, r);
     return r;
   }
 

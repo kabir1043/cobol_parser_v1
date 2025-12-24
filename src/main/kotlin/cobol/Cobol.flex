@@ -22,6 +22,13 @@ IDENTIFIER  = {LETTER}({LETTER}|{DIGIT}|"-")*
 NUMBER      = {DIGIT}+
 STRING      = "'"[^']*"'"
 
+// For PIC_STRING definition, should be lexed separately as a token
+PIC_CHAR    = [ABEGPSVXZabegpsvxz90\+\-\*\$]
+PIC_REPEAT  = "(" {DIGIT}+ ")"
+PIC_UNIT    = ({PIC_CHAR} | "CR" | "DB") {PIC_REPEAT}?
+PIC_PUNCT   = [\/\,\.\:]
+PIC_GROUP   = {PIC_UNIT}+
+PIC_STRING  = {PIC_GROUP} ({PIC_PUNCT} {PIC_GROUP})*
 %%
 
 /* KEYWORDS */
@@ -46,11 +53,10 @@ STRING      = "'"[^']*"'"
 /* SYMBOLS */
 <YYINITIAL> "."                     { return CobolTypes.DOT; }
 <YYINITIAL> "="                     { return CobolTypes.EQ; }
-<YYINITIAL> "("                     { return CobolTypes.LPAREN; }
-<YYINITIAL> ")"                     { return CobolTypes.RPAREN; }
 
 /* LITERALS */
 <YYINITIAL> {NUMBER}                { return CobolTypes.NUMBER; }
+<YYINITIAL> {PIC_STRING}            { return CobolTypes.PIC_STRING; }
 <YYINITIAL> {STRING}                { return CobolTypes.STRING; }
 
 /* IDENTIFIERS */

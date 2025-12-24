@@ -31,6 +31,10 @@ class CobolSyntaxHighlighter : SyntaxHighlighterBase() {
             "COBOL_OPERATOR",
             DefaultLanguageHighlighterColors.OPERATION_SIGN
         )
+        val PIC_STRING = TextAttributesKey.createTextAttributesKey(
+            "COBOL_PIC_STRING",
+            DefaultLanguageHighlighterColors.STRING
+        )
         val BAD_CHARACTER = TextAttributesKey.createTextAttributesKey(
             "COBOL_BAD_CHARACTER",
             HighlighterColors.BAD_CHARACTER
@@ -41,6 +45,7 @@ class CobolSyntaxHighlighter : SyntaxHighlighterBase() {
         val STRING_KEYS = arrayOf(STRING)
         val IDENTIFIER_KEYS = arrayOf(IDENTIFIER)
         val OPERATOR_KEYS = arrayOf(OPERATOR)
+        val PIC_STRING_KEYS = arrayOf(PIC_STRING)
         val BAD_CHAR_KEYS = arrayOf(BAD_CHARACTER)
         val EMPTY_KEYS = arrayOfNulls<TextAttributesKey>(0)
 
@@ -74,11 +79,10 @@ class CobolSyntaxHighlighter : SyntaxHighlighterBase() {
             // OPERATORS
             CobolTypes.DOT,
             CobolTypes.EQ,
-            CobolTypes.LPAREN,
-            CobolTypes.RPAREN
                 -> OPERATOR_KEYS
 
-
+            CobolTypes.PIC_STRING ->
+                PIC_STRING_KEYS
             CobolTypes.IDENTIFIER ->
                 IDENTIFIER_KEYS
             CobolTypes.NUMBER ->
